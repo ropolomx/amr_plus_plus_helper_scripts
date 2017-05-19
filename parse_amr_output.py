@@ -63,7 +63,7 @@ def save_to_file(amr_tabular, new_categories):
 
     df_header = ['Level', 'Iteration', 'Header', 'Class', 'Mechanism', 'Group', 'Gene Fraction', 'Hits']
 
-    new_categories.to_csv(str(sample+"_new_parsed"+".tab"), sep="\t", columns=df_header, index=False)
+    new_categories.to_csv(str(sample+"_parsed"+".tab"), sep="\t", columns=df_header, index=False)
 
 def main():
 
