@@ -4,7 +4,7 @@ import pandas as pd
 import argparse
 import os
 import glob
-from collections import defaultdict
+import re
 
 # Function to define the arguments of the script
 
@@ -38,7 +38,7 @@ def read_data(amr_directory):
 
     sample_files = sample_names(amr_directory)[0]
 
-    amr_results = defaultdict(pd.DataFrame)
+    amr_results = {}
 
     for s in sample_files:
 
@@ -66,7 +66,7 @@ def parse_and_split(amr_results):
 
     return amr_results
 
-def save_to_file(amr_directory, amr_results):
+def save_to_file(amr_directory,amr_results):
 
     samples = sample_names(amr_directory)[1]
 
@@ -74,7 +74,9 @@ def save_to_file(amr_directory, amr_results):
 
     for k,v in amr_results.items():
 
-        v.to_csv(str(amr_directory+k+"_parsed"+".tab"), 
+        filename = re.sub(r'\.tab.*','', k)
+
+        v.to_csv(str(k+"_parsed"+".tab"),
                               sep="\t", 
                               columns=df_header, 
                               index=False)
