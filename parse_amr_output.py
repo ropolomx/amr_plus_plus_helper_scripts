@@ -10,9 +10,9 @@ from collections import defaultdict
 
 def arguments():
 
-    parser = argparse.ArgumentParser(description='Program to parse AmrPlusPlus Gene Ids/Headers into AMR Class, Mechanism and Group')
+    parser = argparse.ArgumentParser(description='Program to parse AmrPlusPlus Gene Ids/Gene Ids into AMR Class, Mechanism and Group')
 
-    parser.add_argument('amrdir', default-"./", help = 'Directory with output tab file from the AmrPlusPlus pipeline')
+    parser.add_argument('amrdir', default=os.getcwd(), help = 'Directory with output tab file from the AmrPlusPlus pipeline')
 
     return parser.parse_args()
 
@@ -23,17 +23,17 @@ def sample_names(amr_directory):
 
     """
 
-    samples = glob.glob(amr_directory+'*.tab*')
+    samples = glob.glob(amr_directory+'/'+'*.tab*')
 
     sample_names = [os.path.splitext(os.path.basename(s))[0] for s in samples]    
 
     return samples, sample_names
 
-def read_data(amr_tabular):
+def read_data(amr_directory):
 
     """ Reads tabular AMRPlusPlus output files from specified directory as Pandas dataframe.
 
-    Returns pandas dataframe with the name of the Gene Id column changed to Header. 
+    Returns pandas dataframe with the name of the Gene Id column changed to Gene Id. 
     """
 
     sample_files = sample_names(amr_directory)[0]
@@ -44,9 +44,7 @@ def read_data(amr_tabular):
 
         amr_results[s] = pd.read_table(s)
 
-    for v in amr_results.values():
-
-        v = v.rename(columns={'Gene Id': 'Header'})
+    #amr_results = amr_results.popitem()
 
     return amr_results
 
@@ -56,30 +54,30 @@ def parse_and_split(amr_results):
 
     Returns a pandas dataframe with the Class, Mechanism and Group columns
 
-    extracted from the Header column"""
+    extracted from the Gene Id column"""
 
     for v in amr_results.values():
     
-        v['Class'] = v['Header'].str.split('|').str[-3]
+        v['Class'] = v['Gene Id'].str.split('|').str[-3]
 
-        v['Mechanism'] = v['Header'].str.split('|').str[-2]
+        v['Mechanism'] = v['Gene Id'].str.split('|').str[-2]
 
-        v['Group'] = v['Header'].str.split('|').str[-1]
+        v['Group'] = v['Gene Id'].str.split('|').str[-1]
 
-    return amr_df
+    return amr_results
 
-def save_to_file(amr_tabular, new_categories):
+def save_to_file(amr_directory, amr_results):
 
-    samples = sample_names(amr_tabular)[1]
+    samples = sample_names(amr_directory)[1]
 
-    df_header = ['Level', 'Iteration', 'Header', 'Class', 'Mechanism', 'Group', 'Gene Fraction', 'Hits']
+    df_header = ['Level', 'Iteration', 'Gene Id', 'Class', 'Mechanism', 'Group', 'Gene Fraction', 'Hits']
 
-    for s in samples:
+    for k,v in amr_results.items():
 
-        new_categories.to_csv(str(s+"_parsed"+".tab"), 
-                                  sep="\t", 
-                                  columns=df_header, 
-                                  index=False)
+        v.to_csv(str(amr_directory+k+"_parsed"+".tab"), 
+                              sep="\t", 
+                              columns=df_header, 
+                              index=False)
 
 def main():
 
@@ -91,7 +89,7 @@ def main():
 
     splitting_headers = parse_and_split(read_results)
 
-    save_to_file(args.amrtable,splitting_headers)
+    save_to_file(args.amrdir,splitting_headers)
 
 if __name__ == '__main__':
     main()
