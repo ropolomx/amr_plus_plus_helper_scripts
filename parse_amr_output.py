@@ -31,10 +31,8 @@ def sample_names(amr_directory):
 
 def read_data(amr_directory):
 
-    """ Reads tabular AMRPlusPlus output files from specified directory as Pandas dataframe.
-
-    Returns pandas dataframe with the name of the Gene Id column changed to Gene Id. 
-    """
+    """Reads tabular AMRPlusPlus output files from specified directory as Pandas dataframe.
+    Returns pandas dataframe"""
 
     sample_files = sample_names(amr_directory)[0]
 
