@@ -13,3 +13,7 @@ __Usage__:
 ### `buildingMegabio.py`
 
 __Function__: This script builds a nucleotide MegaBio database (biocides and biometals) from aminoacid accession numbers from a database curated by CSU.
+
+### `megabio_annotation.R`
+
+__Function__: This script parses old annotation file, and filters it and generates a new annotation file with new FASTA headers from `edirect` search.
