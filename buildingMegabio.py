@@ -1,4 +1,5 @@
 from Bio import SeqIO
+import pandas as pd
 import argparse
 
 def arguments():
@@ -52,6 +53,26 @@ def export_matches(matchDict):
     toSave = [v for v in matchDict.values()]
 
     SeqIO.write(toSave, 'megabio_AAFC.fasta', 'fasta')
+
+def annotation_file():
+
+
+    megabioAAFC = [rec for rec in SeqIO.parse('megabio_AAFC.fasta','fasta')]
+
+
+    protIDs = []
+
+    descriptions = []
+
+    for rec in megabioAAFC:
+        protIDs.append(rec.description.split('protein_id=')[1].split('.')[0])
+        descriptions.append(rec.description)
+
+    descTuples = zip(protIDs, descriptions)
+
+    descDF = pd.DataFrame.from_records(descTuples, names = ['ProtID', 'NewHeader'])
+
+    descDF.to_csv('megabio_updated_headers.csv', index=False)
 
 def main():
 

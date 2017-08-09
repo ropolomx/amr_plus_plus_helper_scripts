@@ -6,7 +6,7 @@ megabioCSU <- read.csv('megabio_annotations_CSU.csv')
 
 aafcProtIDs <- read.table('megabioAAFCProtID.txt')
 
-megabioNew <- megabioCSU[megabioCSU$ProtID %in% aafcProtIDs$V1,]
+# Filter old dataset to match Protein IDs only present in new dataset
 
 megabioNew <- megabioCSU[megabioCSU$ProtID %in% aafcProtIDs$V1,]
 
