@@ -54,7 +54,16 @@ def export_matches(matchDict):
 
     SeqIO.write(toSave, 'megabio_AAFC.fasta', 'fasta')
 
-def annotation_file():
+def extract_ProtID_DF():
+
+    megabioSteven = pd.read_csv('megabio_annotationsv0.1.csv')
+
+    megabioSteven['ProtID'] = megabioSteven['Header'].str.split('|').str[2]
+
+    megabioSteven.to_csv('megabio_annotations_CSU.csv', index=False)
+
+
+def annotation_tuple_DF():
 
 
     megabioAAFC = [rec for rec in SeqIO.parse('megabio_AAFC.fasta','fasta')]
