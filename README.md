@@ -9,3 +9,7 @@ __Function__: This script parses the Gene Ids (or headers) from the AmrPlusPlus 
 __Usage__:
 
 `` $ for i in `ls *.tabular`; do parse_amr_output.py $i; done``
+
+### `buildingMegabio.py`
+
+__Function__: This script builds a nucleotide MegaBio database (biocides and biometals) from aminoacid accession numbers from a database curated by CSU.
