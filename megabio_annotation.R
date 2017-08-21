@@ -27,8 +27,9 @@ megabioNewClean <- megabioMerged %>% select(-c(.data$Header, .data$ProtID))
 
 # Rename dataframe columns
 
-names(megabioNewClean) <- c('gene', 'class', 'mechanism', 'header')
+names(megabioNewClean) <- c('group', 'class', 'mechanism', 'header')
 
 # Export to CSV: this is the "official" MegaBio
 
-write.csv(megabioNewClean, 'megabio_AAFC_v0.1_annotations_NewHeader.csv')
+
+write.csv(megabioNewClean, 'megabio_AAFC_v0.1_annotations_NewHeader.csv', row.names=FALSE)

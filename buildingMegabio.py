@@ -65,7 +65,6 @@ def extract_ProtID_DF():
 
 def annotation_tuple_DF():
 
-
     megabioAAFC = [rec for rec in SeqIO.parse('megabio_AAFC.fasta','fasta')]
 
 
@@ -74,7 +73,7 @@ def annotation_tuple_DF():
     descriptions = []
 
     for rec in megabioAAFC:
-        protIDs.append(rec.description.split('protein_id=')[1].split('.')[0])
+        protIDs.append(rec.description.split('protein_id=')[-1].split('.')[0])
         descriptions.append(rec.description)
 
     descTuples = zip(protIDs, descriptions)
