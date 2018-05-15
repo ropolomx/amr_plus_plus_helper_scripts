@@ -8,10 +8,10 @@ import re
 
 def arguments():
 
-	""" Defining arguments of the script
-	"""
+    """ Defining arguments of the script
+    """
 
-    parser = argparse.ArgumentParser(description='Program to parse a directory with AmrPlusPlus tables containing Gene Ids/Headers. Retunrs table with AMR Class, Mechanism and Group')
+    parser = argparse.ArgumentParser(description='Program to parse a directory with AmrPlusPlus tables containing Gene Ids/Headers. Returns table with AMR Class, Mechanism and Group')
 
     parser.add_argument('amrdir', default=os.getcwd(), help = 'Directory with output tab file from the AmrPlusPlus pipeline')
 
