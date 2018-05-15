@@ -6,11 +6,12 @@ import os
 import glob
 import re
 
-# Function to define the arguments of the script
-
 def arguments():
 
-    parser = argparse.ArgumentParser(description='Program to parse AmrPlusPlus Gene Ids/Gene Ids into AMR Class, Mechanism and Group')
+	""" Defining arguments of the script
+	"""
+
+    parser = argparse.ArgumentParser(description='Program to parse a directory with AmrPlusPlus tables containing Gene Ids/Headers. Retunrs table with AMR Class, Mechanism and Group')
 
     parser.add_argument('amrdir', default=os.getcwd(), help = 'Directory with output tab file from the AmrPlusPlus pipeline')
 
@@ -31,7 +32,7 @@ def sample_names(amr_directory):
 
 def read_data(amr_directory):
 
-    """Reads tabular AMRPlusPlus output files from specified directory as Pandas dataframe.
+    """Reads tabular AMRPlusPlus output files from specified directory as pandas dataframe.
     Returns pandas dataframe"""
 
     sample_files = sample_names(amr_directory)[0]
@@ -48,7 +49,7 @@ def read_data(amr_directory):
 
 def parse_and_split(amr_results):
 
-    """Function for splitting the AMRPlusPlus headers by the pipe character
+    """Function for splitting the AMRPlusPlus headers using the pipe character
 
     Returns a pandas dataframe with the Class, Mechanism and Group columns
 
