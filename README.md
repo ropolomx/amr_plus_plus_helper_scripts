@@ -17,6 +17,7 @@ For present directory:
 ``parse_amr_output.py .``
 
 For sub-directory:
+
 ``parse_amr_output.py ./resistome_results``
 
 
