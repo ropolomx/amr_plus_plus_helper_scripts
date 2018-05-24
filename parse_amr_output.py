@@ -24,7 +24,7 @@ def sample_names(amr_directory):
 
     """
 
-    samples = glob.glob(amr_directory+'/'+'*.tab*')
+    samples = glob.glob(amr_directory+'/'+'*gene.tab*')
 
     sample_names = [os.path.splitext(os.path.basename(s))[0] for s in samples]    
 
@@ -57,11 +57,11 @@ def parse_and_split(amr_results):
 
     for v in amr_results.values():
     
-        v['Class'] = v['Gene Id'].str.split('|').str[-3]
+        v['Class'] = v['Gene'].str.split('|').str[-3]
 
-        v['Mechanism'] = v['Gene Id'].str.split('|').str[-2]
+        v['Mechanism'] = v['Gene'].str.split('|').str[-2]
 
-        v['Group'] = v['Gene Id'].str.split('|').str[-1]
+        v['Group'] = v['Gene'].str.split('|').str[-1]
 
     return amr_results
 
@@ -69,13 +69,13 @@ def save_to_file(amr_directory,amr_results):
 
     samples = sample_names(amr_directory)[1]
 
-    df_header = ['Level', 'Iteration', 'Gene Id', 'Class', 'Mechanism', 'Group', 'Gene Fraction', 'Hits']
+    df_header = ['Sample', 'Gene', 'Class', 'Mechanism', 'Group', 'Gene Fraction', 'Hits']
 
     for k,v in amr_results.items():
 
-        filename = re.sub(r'\.tab.*','', k)
+        filename = re.sub(r'\.tab.*$','', k)
 
-        v.to_csv(str(k+"_parsed"+".tab"),
+        v.to_csv(str(filename+"_parsed"+".tab"),
                               sep="\t", 
                               columns=df_header, 
                               index=False)
