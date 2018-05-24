@@ -12,8 +12,7 @@ __Usage__:
 
 __Software Requirements__:
 
-Python 3 (tested with Python 3.6.3)
-* `pandas` library
+Python 3 (tested with Python 3.6.3). The `pandas` Python library (tested with version 22) is required as well.
 
 ### `buildingMegabio.py`
 
