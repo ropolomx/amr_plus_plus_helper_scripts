@@ -4,11 +4,22 @@ This repository contains scripts for helping with data cleaning, processing and 
 
 ### `parse_amr_output.py`
 
-__Purpose__: This script parses the Gene Ids (or headers) from the AmrPlusPlus database present in the results from CoverageSampler. The script divides those headers into AMR Class, Mechanism and group. The script will read all the *.tab or *tabular files on the same directory.
+__Purpose__: This script parses the Gene Ids (or headers) from the AmrPlusPlus database present in the results from Resistome Analyzer. The script divides those headers into AMR Class, Mechanism and group. The script will read all the Gene output files generated with Resistome Analyzer (*gene.tabular) that present in an user-provided directory, and will extract the Class, Mechanism and Group information from the Gene names. The output of the script is parsed CSV files. Those would have similar names as the input files, but with the word "parsed" in the filename. For example, if your input file is called `sample1_gene.tabular`, the output file will be called `sample1_gene_parsed.tabular`
 
 __Usage__:
 
 ``parse_amr_output.py [name of directory]``
+
+_Examples_
+
+For present directory:
+
+``parse_amr_output.py .``
+
+For sub-directory:
+``parse_amr_output.py ./resistome_results``
+
+
 
 __Software Requirements__:
 
