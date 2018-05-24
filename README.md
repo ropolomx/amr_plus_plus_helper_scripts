@@ -8,7 +8,12 @@ __Purpose__: This script parses the Gene Ids (or headers) from the AmrPlusPlus d
 
 __Usage__:
 
-``parse_amr_output.py .``
+``parse_amr_output.py [name of directory]``
+
+__Software Requirements__:
+
+Python 3 (tested with Python 3.6.3)
+* `pandas` library
 
 ### `buildingMegabio.py`
 
