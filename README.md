@@ -33,3 +33,11 @@ __Purpose__: This script builds a nucleotide MegaBio database (biocides and biom
 ### `megabio_annotation.R`
 
 __Purpose__: This script parses old annotation file, and filters it and generates a new annotation file with new FASTA headers from `edirect` search.
+
+### `make_amr_analytic_matrix.R`
+
+__Purpose__: Making AMR analytic matrices from Coverage Sampler data
+
+### `widenResults_kraken.R`
+
+__Purpose__: Making Kraken analytic matrices from Kraken reports
